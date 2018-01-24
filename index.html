@@ -1,11 +1,13 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
     $.get('https://api.github.com/repos/rfsdalotto/daily-sketches/issues', function (data) {
-        var images = [];
+        var last_posts = [];
 
         for(var i = 0; i < data.length; i++){
             var issue = data[i];
-            if(issue.title.split('[POST]').length > 1){
+            var issue_title_splitted = issue.title.split('[POST]');
+            if(issue_title_splitted.length > 1){
+                var images = [];
                 var body = issue.body;
                 body = body.split('](');
 
@@ -16,10 +18,15 @@
                         images.push(splitted[0])
                     }
                 }
+
+                last_posts.push({
+                    name: issue_title_splitted[1],
+                    images: images
+                })
             }
         }
 
-        console.log(images);
+        console.log(last_posts);
     });
 </script>
 
