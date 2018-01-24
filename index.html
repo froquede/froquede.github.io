@@ -1,3 +1,28 @@
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+    $.get('https://api.github.com/repos/rfsdalotto/daily-sketches/issues', function (data) {
+        var images = [];
+
+        for(var i = 0; i < data.length; i++){
+            var issue = data[i];
+            if(issue.title.split('[POST]').length > 1){
+                var body = issue.body;
+                body = body.split('](');
+
+                for(var b = 0; b < body.length; b++){
+                    var body_piece = body[b];
+                    var splitted = body_piece.split(')');
+                    if(splitted.length > 1){
+                        images.push(splitted[0])
+                    }
+                }
+            }
+        }
+
+        console.log(images);
+    });
+</script>
+
 <p>
     <img align="left" src="https://thumbs.gfycat.com/WetNeedyAssassinbug-size_restricted.gif" />
     <img align="center" src="https://user-images.githubusercontent.com/8432403/35236567-ec1e8854-ff8e-11e7-861b-5371487b4100.gif"
