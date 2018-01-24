@@ -1,20 +1,25 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<title>daily sketches</title>
+
+<body>
+    <div class="posts-container"></div>
+</body>
 <script>
     $.get('https://api.github.com/repos/rfsdalotto/daily-sketches/issues', function (data) {
         var last_posts = [];
 
-        for(var i = 0; i < data.length; i++){
+        for (var i = 0; i < data.length; i++) {
             var issue = data[i];
             var issue_title_splitted = issue.title.split('[POST]');
-            if(issue_title_splitted.length > 1){
+            if (issue_title_splitted.length > 1) {
                 var images = [];
                 var body = issue.body;
                 body = body.split('](');
 
-                for(var b = 0; b < body.length; b++){
+                for (var b = 0; b < body.length; b++) {
                     var body_piece = body[b];
                     var splitted = body_piece.split(')');
-                    if(splitted.length > 1){
+                    if (splitted.length > 1) {
                         images.push(splitted[0])
                     }
                 }
@@ -26,12 +31,26 @@
             }
         }
 
-        console.log(last_posts);
+        initPage(last_posts);
     });
-</script>
 
-<p>
-    <img align="left" src="https://thumbs.gfycat.com/WetNeedyAssassinbug-size_restricted.gif" />
-    <img align="center" src="https://user-images.githubusercontent.com/8432403/35236567-ec1e8854-ff8e-11e7-861b-5371487b4100.gif"
-        width="250" height="250" />
-</p>
+    function initPage(posts) {
+        var html = '';
+        for (var p = 0; p < posts.length; p++) {
+            var post = posts[p];
+            html += generatePostThumb(post);
+        }
+
+        $('.posts-container').html(html);
+    }
+
+    function generatePostThumb(post) {
+        var post_html = '';
+        post_html += '<div class="post-thumb">\
+                        <img class="thumb-img" src="' + post.images[0] + '"></img>\
+                        <p>' + post.name + '</p>\
+                      </div>';
+
+        return post_html;
+    }
+</script>
