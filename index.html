@@ -1,64 +1,128 @@
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<title>daily sketches</title>
+<!DOCTYPE HTML>
+<!--
+	Visualize by TEMPLATED
+	templated.co @templatedco
+	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+<html>
+
+<head>
+	<title>?</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="assets/css/main.css" />
+</head>
 
 <body>
-    <div class="posts-container"></div>
+	<div class="loader loader-default is-active js-loader"></div>
+	<div id="wrapper">
+		<header id="header"></header>
+		<section id="main">
+			<section class="thumbnails posts-container">
+
+			</section>
+		</section>
+
+
+		<h2 class="get-code-call">
+			<a href="https://github.com/rfsdalotto/daily-sketches">get the code</a>
+		</h2>
+
+		<footer id="footer">
+			<ul class="icons">
+				<!-- <li>
+					<a href="#" class="icon style2 fa-facebook">
+						<span class="label">Facebook</span>
+					</a>
+				</li> -->
+				<li>
+					<a href="https://github.com/rfsdalotto" target="_blank" class="icon style2 fa-github">
+						<span class="label">Email</span>
+					</a>
+				</li>
+				<li>
+					<a href="https://www.instagram.com/roquenaoroque" target="_blank" class="icon style2 fa-instagram">
+						<span class="label">Instagram</span>
+					</a>
+				</li>
+				<li>
+					<a href="https://twitter.com/nohabloinglez" target="_blank" class="icon style2 fa-twitter">
+						<span class="label">Twitter</span>
+					</a>
+				</li>
+				<!-- <li>
+					<a href="#" class="icon style2 fa-500px">
+						<span class="label">500px</span>
+					</a>
+				</li> -->
+			</ul>
+		</footer>
+	</div>
 </body>
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/jquery.poptrox.min.js"></script>
+<script src="assets/js/skel.min.js"></script>
+<script src="assets/js/main.js"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-113179312-1"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-113179312-1');
+	window.dataLayer = window.dataLayer || [];
+	function gtag() { dataLayer.push(arguments); }
+	gtag('js', new Date());
+	gtag('config', 'UA-113179312-1');
 </script>
 <script>
-    $.get('https://api.github.com/repos/rfsdalotto/daily-sketches/issues', function (data) {
-        var last_posts = [];
+	$.get('https://api.github.com/repos/rfsdalotto/daily-sketches/issues', function (data) {
+		var last_posts = [];
 
-        for (var i = 0; i < data.length; i++) {
-            var issue = data[i];
-            var issue_title_splitted = issue.title.split('[POST]');
-            if (issue_title_splitted.length > 1) {
-                var images = [];
-                var body = issue.body;
-                body = body.split('](');
+		for (var i = 0; i < data.length; i++) {
+			var issue = data[i];
+			var issue_title_splitted = issue.title.split('[POST]');
+			if (issue_title_splitted.length > 1) {
+				var images = [];
+				var body = issue.body;
+				body = body.split('](');
 
-                for (var b = 0; b < body.length; b++) {
-                    var body_piece = body[b];
-                    var splitted = body_piece.split(')');
-                    if (splitted.length > 1) {
-                        images.push(splitted[0])
-                    }
-                }
+				for (var b = 0; b < body.length; b++) {
+					var body_piece = body[b];
+					var splitted = body_piece.split(')');
+					if (splitted.length > 1) {
+						images.push(splitted[0])
+					}
+				}
 
-                last_posts.push({
-                    name: issue_title_splitted[1],
-                    images: images
-                })
-            }
-        }
+				last_posts.push({
+					name: issue_title_splitted[1],
+					images: images
+				})
+			}
+		}
 
-        initPage(last_posts);
-    });
+		initPage(last_posts);
+	});
 
-    function initPage(posts) {
-        var html = '';
-        for (var p = 0; p < posts.length; p++) {
-            var post = posts[p];
-            html += generatePostThumb(post);
-        }
+	function initPage(posts) {
+		var html = '';
+		for (var p = 0; p < posts.length; p++) {
+			var post = posts[p];
+			html += generatePostThumb(post);
+		}
 
-        $('.posts-container').html(html);
-    }
+		$('.posts-container').html(html);
+	}
 
-    function generatePostThumb(post) {
-        var post_html = '';
-        post_html += '<div class="post-thumb">\
-                        <img class="thumb-img" src="' + post.images[0] + '"></img>\
-                        <p>' + post.name + '</p>\
+	function generatePostThumb(post) {
+		var post_html = '';
+		post_html += '<div class="post-thumb">\
+                        <a><img class="thumb-img" src="' + post.images[0] + '"></img>\
+                        <h3>' + post.name + '</h3></a>\
                       </div>';
 
-        return post_html;
-    }
+		return post_html;
+	}
+
+	$(window).on("load", function () {
+		$('.js-loader').fadeOut(200);
+	});
 </script>
+
+</html>
