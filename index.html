@@ -104,7 +104,13 @@
 		var html = '';
 		for (var p = 0; p < posts.length; p++) {
 			var post = posts[p];
-			html += generatePostThumb(post);
+			var el = generatePostThumb(post);
+			if(p % 4 === 0){
+				el = el + '</div>';
+			}
+			if(p % 4 === 1){
+				el = '<div>' + el;
+			}
 		}
 
 		$('.posts-container').html(html);
