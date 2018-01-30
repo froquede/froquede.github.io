@@ -2380,10 +2380,10 @@
 		display: -webkit-flex;
 		display: -ms-flex;
 		display: flex;
-		-moz-flex-direction: row;
-		-webkit-flex-direction: row;
-		-ms-flex-direction: row;
-		flex-direction: row;
+		-moz-flex-direction: column;
+		-webkit-flex-direction: column;
+		-ms-flex-direction: column;
+		flex-direction: column;
 		position: relative;
 		margin: 0;
 	}
@@ -2395,7 +2395,7 @@
 			transition: all 0.2s ease;
 			border-bottom: none;
 			display: block;
-			width: 100%;
+			width: 150%;
 			margin: 0 0 0 0;
 			text-align: center;
 			/* cursor: pointer; */
@@ -2578,7 +2578,7 @@
 
 	#header {
 		text-align: center;
-		padding: 6em 0 4em 0;
+		padding: 3em 0 4em 0;
 	}
 
 		#header h1 {
