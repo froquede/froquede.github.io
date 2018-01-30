@@ -2611,8 +2611,8 @@
 /* Footer */
 
 	#footer {
-		text-align: center;
-		padding: 4em 0 4em 0;
+		text-align: left;
+		padding: 0em 0 4em 0;
 	}
 
 		#footer:before {
@@ -2634,7 +2634,7 @@
 /* CUSTOM */
 
 .get-code-call{
-	margin: 0;
+	margin: 50px 0px 0px 0px;
 	text-align: center;
 }
 
