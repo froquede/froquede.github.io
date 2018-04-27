@@ -1,7 +1,7 @@
 class Handedness {
-    constructor() {
-        window.addEventListener('touchstart', this.start, false);
-        window.addEventListener('touchend', this.end, false);
+    constructor(changeListener) {
+        window.addEventListener('touchstart', (e) => { this.start(e, this); }, false);
+        window.addEventListener('touchend', (e) => { this.end(e, this); }, false);
 
         this.last_point;
         this.touches = [];
@@ -9,35 +9,36 @@ class Handedness {
         this.last_touch_trail;
         this.last_prediction = '';
         this.last_classification = { total: 0, count: 0, grade: 1 };
+        this.changeListener = changeListener;
     }
 
-    start(e) {
-        this.last_point = new Vector2(e);
+    start(e, self) {
+        self.last_point = new Vector2(e);
     }
-    
-    end(e) {
+
+    end(e, self) {
         var position = new Vector2(e);
         var touch_trail = {
-            start: this.last_point,
+            start: self.last_point,
             end: position,
-            vertical: this.checkIfVertical(this.last_point, position)
+            vertical: self.checkIfVertical(self.last_point, position)
         }
-    
-        this.updateDebug(this.touch_trail);
-    
-        if (this.touch_trail.vertical === true) {
-            this.touches.push(this.touch_trail);
-            this.classify(this.touch_trail);
+
+        self.updateDebug(touch_trail);
+
+        if (touch_trail.vertical === true) {
+            self.touches.push(touch_trail);
+            self.classify(touch_trail);
         }
     }
-    
+
     checkIfVertical(s, e) {
         var w = window.innerWidth;
         var h = window.innerHeight;
-    
+
         var _diff = s.diff(e);
         var t = w * this.threshold;
-    
+
         if (_diff.x >= t) {
             return false;
         }
@@ -56,31 +57,39 @@ class Handedness {
         this.last_classification.total += this.classifyTouch(touch_trail.start.getFurther(touch_trail.end));
         this.last_classification.count += 1;
         this.last_classification.grade = this.last_classification.total / this.last_classification.count;
-    
-        var sides;
+
+        var side;
+        var last_config = JSON.parse(JSON.stringify(this.last_classification));
         if (this.last_classification.grade <= 0.5) {
             side = 'left';
-            updateDebug(this.last_touch_trail, 'left-handed');
+            this.updateDebug(this.last_touch_trail, 'left-handed');
         }
         else {
             side = 'right';
-            updateDebug(this.last_touch_trail, 'right-handed');
+            this.updateDebug(this.last_touch_trail, 'right-handed');
         }
-    
-        this.checkAndNotify(this.last_classification.handedness, side);
+
         this.last_classification.handedness = side;
+        this.checkAndNotify(last_config.handedness || 'right', side);
     }
 
     classifyTouch(point) {
         return point.x / window.innerWidth;
     }
-    
+
     checkAndNotify(old_h, new_h) {
         if (old_h !== new_h) {
-    
+            if (this.changeListener) {
+                try {
+                    this.changeListener({ classification: this.last_classification, touches: this.touches, last_handedness: old_h });
+                }
+                catch(err){
+                    console.error(err);
+                }
+            }
         }
     }
-    
+
     getSide() {
         return { classification: this.last_classification, touches: this.touches };
     }
@@ -92,7 +101,7 @@ class Handedness {
              <p>vertical? ' + touch_trail.vertical + '<p> \
              <p>threshold: ' + this.threshold * 100 + '%<p><br>\
              <h3>prediction: <b>' + (prediction || this.last_prediction) + '</b></h3>';
-    
+
         if (touch_trail) {
             this.last_touch_trail = touch_trail;
         }
