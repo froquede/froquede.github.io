@@ -45,11 +45,11 @@
     }
 
     .left .action {
-        left: 10px;
+        right: 10px;
     }
 
     .right .action {
-        right: 10px;
+        left: 10px;
     }
 
     .action:focus {
@@ -85,135 +85,4 @@
 
     <div style="display: none;" id="debug_info" style="font-size: 24px; font-family: sans-serif;"></div>
 </body>
-<script>
-    window.addEventListener("touchstart", start, false);
-    window.addEventListener("touchend", end, false);
-
-    function Vector2(event, x, y) {
-        this.diff = function (b) {
-            return new Vector2({}, this.positive(this.x - b.x), this.positive(this.y - b.y));
-        }
-
-        this.getFurther = function (b) {
-            if (this.x >= b.x) {
-                return this;
-            }
-            else {
-                return b;
-            }
-        }
-
-        this.positive = function (value) {
-            if (value < 0) {
-                return value * -1;
-            }
-            return value;
-        }
-
-        this.x = x;
-        this.y = y;
-
-        if (Object.keys(event).length > 0) {
-            if (event.touches[0]) {
-                this.x = event.touches[0].clientX;
-                this.y = event.touches[0].clientY;
-            }
-            if (event.changedTouches[0]) {
-                this.x = event.changedTouches[0].clientX;
-                this.y = event.changedTouches[0].clientY;
-            }
-        }
-
-        return this;
-    }
-
-    var last_point;
-    var touches = [];
-    var threshold = .25;
-    var last_touch_trail;
-    var last_prediction = '';
-
-    function start(e) {
-        last_point = new Vector2(e);
-    }
-
-    function end(e) {
-        var position = new Vector2(e);
-        var touch_trail = {
-            start: last_point,
-            end: position,
-            vertical: checkIfVertical(last_point, position)
-        }
-
-        updateDebug(touch_trail);
-
-        if (touch_trail.vertical === true) {
-            touches.push(touch_trail);
-            classify(touches);
-        }
-    }
-
-    function updateDebug(touch_trail, prediction) {
-        document.getElementById('debug_info').innerHTML =
-            '<p>start: ' + touch_trail.start.x + ' - ' + touch_trail.start.y + '<p> \
-         <p>end: ' + touch_trail.end.x + ' - ' + touch_trail.end.y + '<p> \
-         <p>vertical? ' + touch_trail.vertical + '<p> \
-         <p>threshold: ' + threshold * 100 + '%<p><br>\
-         <h3>prediction: <b>' + (prediction || last_prediction) + '</b></h3>';
-
-        if (touch_trail) {
-            last_touch_trail = touch_trail;
-        }
-        if (prediction) {
-            last_prediction = prediction;
-        }
-    }
-
-    function checkIfVertical(s, e) {
-        var w = window.innerWidth;
-        var h = window.innerHeight;
-
-        var _diff = s.diff(e);
-        var t = w * threshold;
-
-        if (_diff.x >= t) {
-            console.log('Vertical?', false);
-            return false;
-        }
-        else {
-            if (_diff.x > _diff.y) {
-                console.log('Vertical?', false);
-                return false;
-            }
-            else {
-                console.log('Vertical?', true);
-                return true;
-            }
-        }
-    }
-
-    function classify(touches) {
-        var grade = 0;
-        for (var t = 0; t < touches.length; t++) {
-            var tt = touches[t];
-            grade += classifyTouch(tt.start.getFurther(tt.end));
-        }
-        grade = grade / touches.length;
-        if (grade < 0.5) {
-            console.log('left-handed')
-            document.getElementsByTagName('BODY')[0].classList.remove('right');
-            document.getElementsByTagName('BODY')[0].classList.add('left');
-            updateDebug(last_touch_trail, 'left-handed');
-        }
-        else {
-            console.log('right-handed')
-            document.getElementsByTagName('BODY')[0].classList.remove('left');
-            document.getElementsByTagName('BODY')[0].classList.add('right');
-            updateDebug(last_touch_trail, 'right-handed');
-        }
-    }
-
-    function classifyTouch(point) {
-        return point.x / window.innerWidth;
-    }
-</script>
+<script src="handedness.js"></script>
