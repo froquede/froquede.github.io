@@ -1,5 +1,90 @@
 <meta name="viewport" content="initial-scale=1">
-<div id="debug_info" style="font-size: 24px; font-family: sans-serif;"></div>
+<header></header>
+<style>
+    html,
+    body {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        background-color: rgb(238, 238, 238);
+    }
+
+    header {
+        width: 100%;
+        height: 60px;
+        background-color: white;
+        position: fixed;
+        border-bottom: 2px solid #fafafa
+    }
+
+    main {
+        padding: 15px;
+        padding-top: 80px
+    }
+
+    .item {
+        width: 100%;
+        height: 80px;
+        background-color: white;
+        border-radius: 4px;
+        margin-bottom: 5px;
+    }
+
+    .action {
+        width: 54px;
+        height: 54px;
+        position: fixed;
+        bottom: 10px;
+        border-radius: 27px;
+        background-image: linear-gradient(#4d4bf4, #572eee);
+        box-shadow: 0 8px 24px rgba(77, 75, 244, 0.32);
+        border: 0;
+        transition: all 250ms;
+    }
+
+    .left .action {
+        left: 10px;
+    }
+
+    .right .action {
+        right: 10px;
+    }
+
+    .action:focus {
+        outline: 0;
+    }
+
+    .action:active {
+        transform: scale(.9);
+    }
+</style>
+
+<body class="right">
+    <main>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+    </main>
+    <button class="action"></button>
+
+    <div style="display: none;" id="debug_info" style="font-size: 24px; font-family: sans-serif;"></div>
+</body>
 <script>
     window.addEventListener("touchstart", start, false);
     window.addEventListener("touchend", end, false);
@@ -116,10 +201,14 @@
         grade = grade / touches.length;
         if (grade < 0.5) {
             console.log('left-handed')
+            document.getElementsByTagName('BODY')[0].classList.remove('right');
+            document.getElementsByTagName('BODY')[0].classList.add('left');
             updateDebug(last_touch_trail, 'left-handed');
         }
         else {
             console.log('right-handed')
+            document.getElementsByTagName('BODY')[0].classList.remove('left');
+            document.getElementsByTagName('BODY')[0].classList.add('right');
             updateDebug(last_touch_trail, 'right-handed');
         }
     }
