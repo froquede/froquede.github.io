@@ -1,0 +1,3 @@
+[submodule "vitor-talks"]
+	path = vitor-talks
+	url = https://github.com/roquef/vitor-talks
