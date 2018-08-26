@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>handedness.js</title>
+    <meta name="author" content="Pedro Grisotti" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu:300,500,700" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Faker/3.1.0/faker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body,
+        div,
+        span,
+        applet,
+        object,
+        iframe,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        p,
+        blockquote,
+        pre,
+        a,
+        abbr,
+        acronym,
+        address,
+        big,
+        cite,
+        code,
+        del,
+        dfn,
+        em,
+        img,
+        ins,
+        kbd,
+        q,
+        s,
+        samp,
+        small,
+        strike,
+        strong,
+        sub,
+        sup,
+        tt,
+        var,
+        b,
+        u,
+        i,
+        center,
+        dl,
+        dt,
+        dd,
+        ol,
+        ul,
+        li,
+        fieldset,
+        form,
+        label,
+        legend,
+        table,
+        caption,
+        tbody,
+        tfoot,
+        thead,
+        tr,
+        th,
+        td,
+        article,
+        aside,
+        canvas,
+        details,
+        embed,
+        figure,
+        figcaption,
+        footer,
+        header,
+        hgroup,
+        menu,
+        nav,
+        output,
+        ruby,
+        section,
+        summary,
+        time,
+        mark,
+        audio,
+        video {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            font-size: 100%;
+            font: inherit;
+            vertical-align: baseline;
+        }
+
+        /* HTML5 display-role reset for older browsers */
+        article,
+        aside,
+        details,
+        figcaption,
+        figure,
+        footer,
+        header,
+        hgroup,
+        menu,
+        nav,
+        section {
+            display: block;
+        }
+
+        body {
+            font-family: 'Ubuntu', sans-serif;
+            line-height: 1;
+        }
+
+        ol,
+        ul {
+            list-style: none;
+        }
+
+        blockquote,
+        q {
+            quotes: none;
+        }
+
+        blockquote:before,
+        blockquote:after,
+        q:before,
+        q:after {
+            content: '';
+            content: none;
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+
+        .button--fixed {
+            position: fixed;
+            bottom: 15px;
+            width: 54px;
+            height: 54px;
+            background-color: rgba(68, 69, 255, 1);
+            border-radius: 50%;
+            transition: all 250ms;
+            z-index: 1;
+        }
+
+        body.-right .button--fixed {
+            right: 15px;
+        }
+
+        body.-left .button--fixed {
+            left: 15px;
+        }
+
+        .item.-active .item__profile,
+        .item.-active .item__content--wrapper {
+            transform: translateX(-20px);
+        }
+
+        .item {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            height: 76px;
+        }
+
+        .item__profile {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background-color: rgb(220, 220, 220);
+            margin: 0 12px 0 15px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .item__actions {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            background: linear-gradient(270deg, rgba(255, 255, 255, 1) 60%, rgba(255, 255, 255, 0) 100%);
+            padding-right: 15px;
+            z-index: 1;
+        }
+
+        .item__actions--share {
+            width: 48px;
+            height: 48px;
+            border-radius: 6px;
+            border: 1px solid rgb(240, 240, 240);
+            margin-left: 10px;
+        }
+
+        .item__actions--delete {
+            width: 48px;
+            height: 48px;
+            border-radius: 6px;
+            background-color: rgba(252, 51, 76, 1);
+            margin-left: 10px;
+        }
+
+        .item__content {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            height: 100%;
+            border-bottom: 1px solid rgb(240, 240, 240);
+            position: relative;
+        }
+
+        /* .item__content:last-child {
+                border-bottom: 0;
+            } */
+
+        .item__name {
+            color: rgba(40, 40, 40, 1);
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .item__date {
+            color: rgba(150, 150, 150, 1);
+            font-weight: 300;
+            font-size: 14px;
+        }
+
+        .left .button--fixed {
+            right: 10px;
+        }
+
+        .right .button--fixed {
+            left: 10px;
+        }
+
+        .button--fixed:focus {
+            outline: 0;
+        }
+
+        .button--fixed:active {
+            transform: scale(.9);
+        }
+
+        .item_upper-layer {
+            width: 100%;
+            height: 76px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: white;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            z-index: 2;
+            transition: .1s ease all;
+        }
+    </style>
+</head>
+
+<body class="right">
+    <div class="button--fixed"></div>
+    <div class="item">
+        <div class="item__content">
+            <div class="item_upper-layer swipe-it">
+                <div class="item__profile" style="background-image: url({{image}})"></div>
+                <div class="item__content--wrapper">
+                    <h2 class="item__name">{{name}}</h2>
+                    <span class="item__date">{{date}}</span>
+                </div>
+            </div>
+            <div class="item__actions">
+                <div class="item__actions--share"></div>
+                <div class="item__actions--delete"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="ui.js"></script>
+    <script src="swipe-it.js"></script>
+    <script src="dist/handedness.js"></script>
+    <script>
+        var h = new Handedness(function (newH) {
+            var body = document.getElementsByTagName('body')[0];
+            console.log(newH.classification.handedness);
+            body.classList.remove(newH.last_handedness);
+            body.classList.add(newH.classification.handedness);
+        });
+    </script>
+</body>
+
+</html>
