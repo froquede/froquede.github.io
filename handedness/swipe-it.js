@@ -1,9 +1,10 @@
-var zero, last_touch;
+var zero, last_touch, start_y;
 var offset = 125;
 function start(e) {
     console.log('start');
 
     zero = e.touches[0].clientX;
+    start_y = e.touches[0].clientY;
 }
 
 function move(e) {
@@ -35,13 +36,26 @@ function end(e) {
         diff = offset + diff;
     }
 
-    if (diff > offset / 2) {
-        e.target.style.left = -offset + 'px';
-        e.target.setAttribute('data-swiped', true);
+    let h_diff = start_y - last_touch.clientY;
+    if (h_diff < 0) { h_diff *= -1; }
+
+    if (h_diff < e.target.offsetHeight / 2) {
+        if (diff > offset / 2) {
+            e.target.style.left = -offset + 'px';
+            e.target.setAttribute('data-swiped', true);
+        }
+        else {
+            e.target.style.left = 0;
+            e.target.setAttribute('data-swiped', false);
+        }
     }
     else {
-        e.target.style.left = 0;
-        e.target.setAttribute('data-swiped', false);
+        if (e.target.getAttribute('data-swiped') === 'true') {
+            e.target.style.left = -offset + 'px';
+        }
+        else{
+            e.target.style.left = 0;
+        }
     }
 }
 
