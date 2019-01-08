@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+  <link rel="stylesheet" data-name="vs/editor/editor.main" href="src/js/vendor/vs/editor/editor.main.css">
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      /* display: inline-block; */
+    }
+
+    .main {
+      width: 100%;
+      height: calc(100vh - 50px);
+      display: flex;
+      margin: 0;
+    }
+
+    #editor {
+      width: 50vw;
+      height: 100%;
+      margin: 0;
+      border: 0;
+    }
+
+    #viewport {
+      width: 50vw;
+      height: 100%;
+    }
+
+    .toolbar{
+      background: #32373f;
+      width: 100vw;
+      height: 49px;
+      border-bottom: 1px solid #4c525f;
+      color: #fafafa;
+    }
+
+    .toolbar .menu-items {
+      width: auto;
+      height: 100%;
+      padding: 5px;
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    .toolbar .menu-items ion-icon {
+      font-size: 38px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="toolbar">
+    <div class="menu-items">
+      <ion-icon title="Run code!" onclick="run()" name="arrow-dropright-circle"></ion-icon>
+    </div>
+  </div>
+  <div class="main">
+    <div id="editor">
+    </div>
+    <div id="viewport">
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/p5.min.js"></script>
+  <script src="https://unpkg.com/ionicons@4.5.0/dist/ionicons.js"></script>
+  <script>var require = { paths: { 'vs': 'src/js/vendor/vs' } };</script>
+  <script src="src/js/vendor/vs/loader.js"></script>
+  <script src="src/js/vendor/vs/editor/editor.main.nls.js"></script>
+  <script src="src/js/vendor/vs/editor/editor.main.js"></script>
+
+  <script src="src/js/main.js"></script>
+</body>
+
+</html>

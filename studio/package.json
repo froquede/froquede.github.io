@@ -1,0 +1,27 @@
+{
+  "name": "canvas-studio",
+  "version": "1.0.0",
+  "description": "interface to make canvas prototypes and export dynamic and static renders",
+  "main": "index.js",
+  "scripts": {
+    "server": "node_modules/.bin/http-server -c-1 ./ -p 8000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/roquef/canvas-studio.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/roquef/canvas-studio/issues"
+  },
+  "homepage": "https://github.com/roquef/canvas-studio#readme",
+  "dependencies": {
+    "ccapture.js": "^1.1.0",
+    "monaco-editor": "^0.14.3",
+    "p5": "^0.7.1"
+  },
+  "devDependencies": {
+    "http-server": "^0.11.1"
+  }
+}
