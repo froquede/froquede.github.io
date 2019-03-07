@@ -2,12 +2,42 @@
 <link href='https://api.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css' rel='stylesheet' />
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <style>
-    html, body {
+    html,
+    body {
         margin: 0;
         padding: 0;
+        width: 100vw;
+        height: 100vh;
+    }
+
+    .loaded-layers {
+        width: 200px;
+        height: 460px;
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        padding: 20px;
+        box-sizing: border-box;
+        color: black;
+        z-index: 100;
+        background: #fafafa;
+    border: 1px solid grey;
+    }
+
+    p {
+        margin: 5px;
+        color: red;
+    }
+
+    p.active {
+        margin: 5px;
+        color: blue;
     }
 </style>
-<div id='map' style='width: 100vw; height: 100vh;'></div>
+<div class="loaded-layers">
+
+</div>
+<div id='map' style='width: 100vw; height: 100vh; z-index: 0;'></div>
 <script>
     mapboxgl.accessToken = 'pk.eyJ1Ijoicm9xdWVmc2QiLCJhIjoiY2lucnIwZHJnMTBsZnR0bTM3M2U0dWhvciJ9.1yHRa7IYt3hoFU-gHwrXnQ';
     var map = new mapboxgl.Map({
@@ -15,25 +45,68 @@
         center: [-47.641169, -7.396057],
         zoom: 8,
         // style: 'mapbox://styles/mapbox/streets-v11',
-        style: 'https://roquef.github.com/geoviewer/empty.json'
+        style: {
+            "version": 8,
+            "name": "Empty",
+            "sources": {},
+            "layers": [
+                {
+                    "id": "background",
+                    "type": "background",
+                    "paint": {
+                        "background-color": "rgba(255, 255, 255, 0)"
+                    }
+                }
+            ],
+            "id": "empty"
+        }
     });
 
     map.addControl(new mapboxgl.NavigationControl());
 
-    $.get('./RES_NOR.json', function (gjson) {
-        console.log(gjson.features[0])
-        map.addLayer({
-            'id': 'maine',
-            'type': 'fill',
-            'source': {
-                'type': 'geojson',
-                'data': gjson.features[0]
-            },
-            'layout': {},
-            'paint': {
-                'fill-color': '#97dbf2',
-                'fill-opacity': .9
-            }
-        });
-    })
+    map.on('load', function () {
+        addLayer('./RES_NOR.json');
+        addLayer('./AC_TOTAL.json');
+        addLayer('./BARR.json');
+    });
+
+    function addLayer(name) {
+        $.get(name, function (gjson) {
+            console.log(gjson, name)
+            map.addLayer({
+                'id': name,
+                'type': 'fill',
+                'source': {
+                    'type': 'geojson',
+                    'data': gjson
+                },
+                'layout': {
+                    'visibility': 'visible'
+                },
+                'paint': {
+                    'fill-color': '#97dbf2',
+                    'fill-opacity': .85,
+                    'fill-outline-color': '#000'
+                }
+            });
+
+            $('.loaded-layers').append(`<p class="active" onclick="toggleLayer('${name}', this)">${name}</p>`);
+            setTimeout(() => {
+                $('.loaded-layers').css('z-index', 100);
+            }, 5000);
+        })
+    }
+
+    function toggleLayer(clickedLayer, e) {
+        var visibility = map.getLayoutProperty(clickedLayer, 'visibility');
+
+        if (visibility === 'visible') {
+            map.setLayoutProperty(clickedLayer, 'visibility', 'none');
+            e.className = '';
+        } else {
+            e.className = 'active';
+            map.setLayoutProperty(clickedLayer, 'visibility', 'visible');
+        }
+
+    }
 </script>
