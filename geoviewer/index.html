@@ -1,0 +1,39 @@
+<script src='https://api.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script>
+<link href='https://api.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css' rel='stylesheet' />
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<style>
+    html, body {
+        margin: 0;
+        padding: 0;
+    }
+</style>
+<div id='map' style='width: 100vw; height: 100vh;'></div>
+<script>
+    mapboxgl.accessToken = 'pk.eyJ1Ijoicm9xdWVmc2QiLCJhIjoiY2lucnIwZHJnMTBsZnR0bTM3M2U0dWhvciJ9.1yHRa7IYt3hoFU-gHwrXnQ';
+    var map = new mapboxgl.Map({
+        container: 'map',
+        center: [-47.641169, -7.396057],
+        zoom: 8,
+        // style: 'mapbox://styles/mapbox/streets-v11',
+        style: 'https://roquef.github.com/geoviewer/empty.json'
+    });
+
+    map.addControl(new mapboxgl.NavigationControl());
+
+    $.get('./RES_NOR.json', function (gjson) {
+        console.log(gjson.features[0])
+        map.addLayer({
+            'id': 'maine',
+            'type': 'fill',
+            'source': {
+                'type': 'geojson',
+                'data': gjson.features[0]
+            },
+            'layout': {},
+            'paint': {
+                'fill-color': '#97dbf2',
+                'fill-opacity': .9
+            }
+        });
+    })
+</script>
