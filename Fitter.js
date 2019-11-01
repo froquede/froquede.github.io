@@ -67,5 +67,3 @@ class Fitter {
         this.options = Object.assign(this.options, options);
     }
 }
-
-export default Fitter;
