@@ -1,7 +1,30 @@
+<style>
+    html, body {
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+</style>
 <div style="max-width: 200px">
     <p class="js-fit" style="font-family: Arial, Helvetica, sans-serif; border: 1px solid black;">
         Lorem ipsum</p>
 </div>
+<p>(This example has 1s to every change timeout)</p>
+<code>
+     setTimeout(() => {
+        let f = new Fitter({ min: 12, max: 64, element: '.js-fit' });
+
+        setTimeout(() => {
+            document.querySelector('.js-fit').innerText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse tincidunt ut risus vehicula semper.';
+            f.set({ min: 16 });
+            f.fit();
+        }, 1e3)
+    }, 1e3)
+</code>
 <script src="Fitter.js"></script>
 <script>
     setTimeout(() => {
