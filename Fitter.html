@@ -13,18 +13,20 @@
     <p class="js-fit" style="font-family: Arial, Helvetica, sans-serif; border: 1px solid black;">
         Lorem ipsum</p>
 </div>
-<p>(This example has 1s to every change timeout)</p>
-<code>
-     setTimeout(() => {
-        let f = new Fitter({ min: 12, max: 64, element: '.js-fit' });
+<p>(This example has 1s timeout to every change)</p>
+<pre>
+    <code>
+         setTimeout(() => {
+            let f = new Fitter({ min: 12, max: 64, element: '.js-fit' });
 
-        setTimeout(() => {
-            document.querySelector('.js-fit').innerText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse tincidunt ut risus vehicula semper.';
-            f.set({ min: 16 });
-            f.fit();
+            setTimeout(() => {
+                document.querySelector('.js-fit').innerText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse tincidunt ut risus vehicula semper.';
+                f.set({ min: 16 });
+                f.fit();
+            }, 1e3)
         }, 1e3)
-    }, 1e3)
-</code>
+    </code>
+</pre>
 <script src="Fitter.js"></script>
 <script>
     setTimeout(() => {
