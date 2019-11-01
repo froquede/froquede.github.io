@@ -3,3 +3,14 @@
         Lorem ipsum</p>
 </div>
 <script src="Fitter.js"></script>
+<script>
+    setTimeout(() => {
+        let f = new Fitter({ min: 12, max: 64, element: '.js-fit' });
+
+        setTimeout(() => {
+            document.querySelector('.js-fit').innerText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse tincidunt ut risus vehicula semper.';
+            f.set({ min: 16 });
+            f.fit();
+        }, 1e3)
+    }, 1e3)
+</script>
