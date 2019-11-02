@@ -13,6 +13,7 @@ class Fitter {
     }
 
     fit() {
+        console.time('fit');
         let el;
 
         if (this.options.shadowRoot) {
@@ -40,10 +41,13 @@ class Fitter {
                 if (r > el.clientWidth) {
                     el.style.fontSize = `${c - 1 > this.options.max ? this.options.max : c - 1}px`;
                     el.style.border = '1px solid black';
+                    console.timeEnd('fit');
                     return;
                 }
             }
             el.style.fontSize = `${this.options.max}px`;
+            el.style.border = '1px solid black';
+            console.timeEnd('fit');
             return;
         }
         else {
@@ -52,11 +56,13 @@ class Fitter {
                 if (r > el.clientWidth) {
                     el.style.fontSize = `${c - 1 < this.options.min ? this.options.min : c - 1}px`;
                     el.style.border = '1px solid black';
+                    console.timeEnd('fit');
                     return;
                 }
             }
             el.style.fontSize = `${this.options.min}px`;
             el.style.border = '1px solid black';
+            console.timeEnd('fit');
             return;
         }
     }
