@@ -32,10 +32,12 @@
 <script src="Fitter.js"></script>
 <script>
     let el = document.querySelector('.js-fit');
+    let f = new Fitter({ min: 16, max: 64, element: el });
     
     function run() {
         setTimeout(() => {
-            let f = new Fitter({ min: 16, max: 64, element: '.js-fit' });
+            f.set({ min: 16, max: 64 });
+            f.fit();
 
             setTimeout(() => {
                 el.innerText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
@@ -43,8 +45,8 @@
                 f.fit();
                 
                 setTimeout(() => {
-                    el.innerText = 'Lorem ipsum';
-                    f.set({ min: 16 });
+                    el.innerTt = 'Lorem ipsum';
+                    f.set({ max: 16 });
                     f.fit();
                     run();
                 }, 1e3)
