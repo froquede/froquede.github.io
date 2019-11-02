@@ -31,16 +31,21 @@
 </pre>
 <script src="Fitter.js"></script>
 <script>
+    let el = document.querySelector('.js-fit');
+    
     function run() {
         setTimeout(() => {
             let f = new Fitter({ min: 16, max: 64, element: '.js-fit' });
 
             setTimeout(() => {
-                document.querySelector('.js-fit').innerText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
+                el.innerText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
                 f.set({ min: 10 });
                 f.fit();
                 
                 setTimeout(() => {
+                    el.innerText = 'Lorem ipsum';
+                    f.set({ min: 16 });
+                    f.fit();
                     run();
                 }, 1e3)
             }, 1e3)
