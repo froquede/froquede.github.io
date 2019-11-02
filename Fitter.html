@@ -1,3 +1,4 @@
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
     html, body {
         width: 100vw;
@@ -34,11 +35,11 @@
 <pre>
     <code>
          setTimeout(() => {
-            let f = new Fitter({ min: 12, max: 64, element: '.js-fit' });
+            let f = new Fitter({ min: 16, max: 64, element: '.js-fit' });
         
             setTimeout(() => {
                 document.querySelector('.js-fit').innerText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
-                f.set({ min: 16 });
+                f.set({ min: 10 });
                 f.fit();
             }, 1e3)
         }, 1e3)
