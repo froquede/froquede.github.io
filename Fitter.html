@@ -20,9 +20,9 @@
     <code>
          setTimeout(() => {
             let f = new Fitter({ min: 12, max: 64, element: '.js-fit' });
-
+        
             setTimeout(() => {
-                document.querySelector('.js-fit').innerText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse tincidunt ut risus vehicula semper.';
+                document.querySelector('.js-fit').innerText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
                 f.set({ min: 16 });
                 f.fit();
             }, 1e3)
@@ -31,13 +31,21 @@
 </pre>
 <script src="Fitter.js"></script>
 <script>
-    setTimeout(() => {
-        let f = new Fitter({ min: 12, max: 64, element: '.js-fit' });
-
+    function run() {
         setTimeout(() => {
-            document.querySelector('.js-fit').innerText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse tincidunt ut risus vehicula semper.';
-            f.set({ min: 16 });
-            f.fit();
+            let f = new Fitter({ min: 16, max: 64, element: '.js-fit' });
+
+            setTimeout(() => {
+                document.querySelector('.js-fit').innerText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
+                f.set({ min: 10 });
+                f.fit();
+                
+                setTimeout(() => {
+                    run();
+                }, 1e3)
+            }, 1e3)
         }, 1e3)
-    }, 1e3)
+    }
+    
+    run();
 </script>
