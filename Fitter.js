@@ -23,7 +23,7 @@ class Fitter {
             el = typeof this.options.element === 'string' ? window.document.querySelector(this.options.element) : this.options.element;
         }
         
-        el.style.border = '1px solid red';
+        el.style.borderColor = 'red';
 
         let style = window.getComputedStyle(el, null);
         let fontSize = style.getPropertyValue('font-size');
@@ -40,13 +40,13 @@ class Fitter {
                 let r = this.getTextWidth(el.innerText, `${fontWeight} ${c}px ${fontFamily}`);
                 if (r > el.clientWidth) {
                     el.style.fontSize = `${c - 1 > this.options.max ? this.options.max : c - 1}px`;
-                    el.style.border = '1px solid black';
+                    el.style.borderColor = 'black';
                     console.timeEnd('fit');
                     return;
                 }
             }
             el.style.fontSize = `${this.options.max}px`;
-            el.style.border = '1px solid black';
+            el.style.borderColor = 'black';
             console.timeEnd('fit');
             return;
         }
@@ -55,13 +55,13 @@ class Fitter {
                 let r = this.getTextWidth(el.innerText, `${fontWeight} ${c}px ${fontFamily}`);
                 if (r > el.clientWidth) {
                     el.style.fontSize = `${c - 1 < this.options.min ? this.options.min : c - 1}px`;
-                    el.style.border = '1px solid black';
+                    el.style.borderColor = 'black';
                     console.timeEnd('fit');
                     return;
                 }
             }
             el.style.fontSize = `${this.options.min}px`;
-            el.style.border = '1px solid black';
+            el.style.borderColor = 'black';
             console.timeEnd('fit');
             return;
         }
