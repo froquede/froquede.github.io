@@ -1,0 +1,74 @@
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+    html, body {
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        box-sizing: border-box;
+        padding: 10vw;
+        position: relative;
+    }
+    
+    .container {
+        min-width: 200px;
+        width: 200px;
+        position: absolute;
+        top: 0;
+        margin-top: 0;
+    }
+    
+    .container p {
+        margin: 0;
+        font-size: 16px;
+        transition: font 0.5s ease;
+    }
+</style>
+<div class="container">
+    <p class="js-fit" style="font-family: Arial, Helvetica, sans-serif; border: 1px solid black;">
+        Lorem ipsum</p>
+</div>
+<p>(This example has 1s timeout for every change, open the console for execution time)</p>
+<pre>
+    <code>
+         setTimeout(() => {
+            let f = new Fitter({ min: 16, max: 64, element: '.js-fit' });
+        
+            setTimeout(() => {
+                document.querySelector('.js-fit').innerText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
+                f.set({ min: 10 });
+                f.fit();
+            }, 1e3)
+        }, 1e3)
+    </code>
+</pre>
+<script src="Fitter.js"></script>
+<script>
+    let el = document.querySelector('.js-fit');
+    let f = new Fitter({ min: 16, max: 64, element: el });
+    
+    function run() {
+        setTimeout(() => {
+            f.set({ min: 16, max: 64 });
+            f.fit();
+
+            setTimeout(() => {
+                el.innerText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
+                f.set({ min: 10 });
+                f.fit();
+                
+                setTimeout(() => {
+                    el.innerText = 'Lorem ipsum';
+                    f.set({ max: 16 });
+                    f.fit();
+                    run();
+                }, 1e3)
+            }, 1e3)
+        }, 1e3)
+    }
+    
+    run();
+</script>

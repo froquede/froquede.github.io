@@ -1,0 +1,73 @@
+<link href="https://fonts.googleapis.com/css?family=Staatliches&display=swap" rel="stylesheet">
+<style>
+    html,
+    body {
+        width: 100vw;
+        height: 100vh;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        overflow: hidden;
+        background: yellow;
+        transition: all .5s ease;
+    }
+
+    body.active {
+        background: red;
+        transition: all .5s ease;
+    }
+
+    .container {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 6vh;
+        text-align: center;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all .5s ease;
+    }
+
+    .container p {
+        width: 100%;
+        transition: all .5s ease;
+        color: red;
+        margin: 0;
+        font-family: 'Staatliches', cursive;
+    }
+
+    .container p.active {
+        color: yellow;
+        transition: all .5s ease;
+    }
+</style>
+<script src="Fitter.js"></script>
+<title>Fitter - Responsive Example</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<body>
+    <div class="container">
+        <p data-fitter>Example</p>
+    </div>
+</body>
+<script src="index.js"></script>
+<script>
+    const f = new Fitter();
+    function run() {
+        f.set({ min: window.innerHeight * .1, max: window.innerHeight * .1 });
+        f.fit();
+        setTimeout(() => {
+            f.set({ max: Number.MAX_SAFE_INTEGER });
+            f.fit();
+            document.querySelector('.container p').classList.toggle('active');
+            document.querySelector('body').classList.toggle('active');
+            setTimeout(() => {
+                document.querySelector('.container p').classList.toggle('active');
+                document.querySelector('body').classList.toggle('active');
+                run();
+            }, 2e3);
+        }, 2e3)
+    }
+    run();
+</script>
