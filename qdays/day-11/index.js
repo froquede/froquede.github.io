@@ -5,5 +5,5 @@ const fps = 20;
 canvas.set('fps', fps)
 canvas.set('clearAfterDraw', true);
 canvas.set('background', { r: 10, g: 10, b: 10 });
-canvas.set('motion_blur', parseInt(100 * Math.random()));
+canvas.set('motion_blur', 10);
 canvas.draw(new Skate());
