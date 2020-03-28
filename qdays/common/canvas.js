@@ -46,7 +46,6 @@ class Canvas {
 
     next() {
         if (this.options.clearAfterDraw) {
-            console.log(this.options.background)
             this.ctx.fillStyle = `rgba(${this.options.background.r}, ${this.options.background.g}, ${this.options.background.b}, ${1 / this.options.motion_blur})`;
             this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
             this.count = 0;
