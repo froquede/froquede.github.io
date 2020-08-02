@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔪</title>
+</head>
+
+<body>
+    <label for="text">Frase</label>
+    <input name="text" style="margin-bottom: 40px;">
+    <br>
+    <label for="emoji">Emoje</label>
+    <input name="emoji" value="🔪" style="margin-bottom: 40px;">
+    <br>
+    <div class="js-result"></div>
+    <div class="js-action"></div>
+</body>
+<script>
+    let result = document.querySelector('.js-result');
+    let text = document.getElementsByName('text')[0];
+    let emoji = document.getElementsByName('emoji')[0];
+
+    text.addEventListener('keyup', (evt) => {
+        result.innerText = text.value.split(' ').join(emoji.value);
+    });
+
+    emoji.addEventListener('keyup', (evt) => {
+        result.innerText = text.value.split(' ').join(emoji.value);
+    });
+
+    result.addEventListener('click', () => {
+        navigator.clipboard.writeText(result.innerText).then(function () {
+            document.querySelector('.js-action').innerText = 'Copiado';
+        }, function (err) {
+            document.querySelector('.js-action').innerText = `Async: Could not copy text: ${err}`;
+        });
+    })
+</script>
+
+</html>
