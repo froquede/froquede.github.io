@@ -1,7 +1,7 @@
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 10000);
 
-const renderer = new THREE.WebGLRenderer();
+const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
@@ -13,7 +13,7 @@ dracoLoader.setDecoderPath('https://cdn.rawgit.com/mrdoob/three.js/master/exampl
 loader.setDRACOLoader(dracoLoader);
 
 loader.load(
-    './p6x2.glb',
+    './p6x30.glb',
     function (gltf) {
         document.querySelector('.js-value').innerHTML = 'rendering';
         setTimeout(() => {
@@ -22,7 +22,6 @@ loader.load(
             camera.position.y = 100;
             camera.position.z = 100;
             camera.lookAt(model.position)
-            renderer.render(scene, camera);
             model.position.y = -10;
 
             document.querySelector('.js-value').innerHTML = 'done';
@@ -30,8 +29,9 @@ loader.load(
         }, 0);
     },
     function (xhr) {
-        let total = xhr.loaded / 13933416 * 100;
-        document.querySelector('.js-value').innerHTML = (total.toFixed(2) + '% loaded');
+        // console.log(xhr.total);
+        let total = xhr.loaded / 23060400 * 100;
+        document.querySelector('.js-value').innerHTML = (total.toFixed(2) + '% loaded - 30%');
 
         if (total.toFixed(0) == 100) {
             document.querySelector('.js-value').innerHTML = 'processing model';
