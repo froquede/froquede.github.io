@@ -31,7 +31,7 @@ loader.load(
     },
     function (xhr) {
         console.log(xhr.loaded, xhr.total);
-        document.querySelector('.js-value').innerHTML = ((xhr.loaded / xhr.total * 100) + '% loaded');
+        document.querySelector('.js-value').innerHTML = ((xhr.loaded / 13933416 * 100) + '% loaded');
     },
     function (error) {
         document.querySelector('.js-value').innerHTML = error;
