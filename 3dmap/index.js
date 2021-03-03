@@ -15,19 +15,27 @@ loader.setDRACOLoader(dracoLoader);
 loader.load(
     './p6x2.glb',
     function (gltf) {
-        console.log('done');
-        let model = gltf.scene.children[0];
-        scene.add(model);
-        camera.position.y = 100;
-        camera.position.z = 100;
-        camera.lookAt(model.position)
-        renderer.render(scene, camera);
+        document.querySelector('.js-value').innerHTML = 'rendering';
+        setTimeout(() => {
+            let model = gltf.scene.children[0];
+            scene.add(model);
+            camera.position.y = 100;
+            camera.position.z = 100;
+            camera.lookAt(model.position)
+            renderer.render(scene, camera);
+            model.position.y = -10;
 
-        model.position.y = -10;
-        controls.update();
+            document.querySelector('.js-value').innerHTML = 'done';
+            animate();
+        }, 0);
     },
     function (xhr) {
-        document.querySelector('.js-value').innerHTML = ((xhr.loaded / 13933416 * 100).toFixed(2) + '% loaded');
+        let total = xhr.loaded / 13933416 * 100;
+        document.querySelector('.js-value').innerHTML = (total.toFixed(2) + '% loaded');
+
+        if (total.toFixed(0) == 100) {
+            document.querySelector('.js-value').innerHTML = 'processing model';
+        }
     },
     function (error) {
         document.querySelector('.js-value').innerHTML = error;
@@ -42,5 +50,3 @@ function animate() {
     controls.update();
     renderer.render(scene, camera);
 }
-
-animate();
