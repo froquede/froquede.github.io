@@ -30,8 +30,7 @@ loader.load(
         controls.update();
     },
     function (xhr) {
-        console.log(xhr.loaded, xhr.total);
-        document.querySelector('.js-value').innerHTML = ((xhr.loaded / 13933416 * 100) + '% loaded');
+        document.querySelector('.js-value').innerHTML = ((xhr.loaded / 13933416 * 100).toFixed(2) + '% loaded');
     },
     function (error) {
         document.querySelector('.js-value').innerHTML = error;
