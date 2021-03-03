@@ -13,7 +13,7 @@ dracoLoader.setDecoderPath('https://cdn.rawgit.com/mrdoob/three.js/master/exampl
 loader.setDRACOLoader(dracoLoader);
 
 loader.load(
-    './p6x30.glb',
+    './p6x3c.glb',
     function (gltf) {
         document.querySelector('.js-value').innerHTML = 'rendering';
         setTimeout(() => {
@@ -31,7 +31,7 @@ loader.load(
     function (xhr) {
         // console.log(xhr.total);
         let total = xhr.loaded / 23060400 * 100;
-        document.querySelector('.js-value').innerHTML = (total.toFixed(2) + '% loaded - 30%');
+        document.querySelector('.js-value').innerHTML = (total.toFixed(2) + '% loaded - 3% compressed');
 
         if (total.toFixed(0) == 100) {
             document.querySelector('.js-value').innerHTML = 'processing model';
