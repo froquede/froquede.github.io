@@ -13,13 +13,10 @@ dracoLoader.setDecoderPath('https://cdn.rawgit.com/mrdoob/three.js/master/exampl
 loader.setDRACOLoader(dracoLoader);
 
 loader.load(
-    // resource URL
     './p6x2.glb',
-    // called when the resource is loaded
     function (gltf) {
         console.log('done');
         let model = gltf.scene.children[0];
-        // model.position.y = -1;
         scene.add(model);
         camera.position.y = 100;
         camera.position.z = 100;
