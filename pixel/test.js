@@ -21,7 +21,7 @@ const scene = new THREE.Scene();
 var loader = new GLTFLoader();
 var camera = new THREE.OrthographicCamera(window.innerWidth / - 2, window.innerWidth / 2, window.innerHeight / 2, window.innerHeight / - 2, 1, 10000);
 camera.position.set(0, 0, 30);
-camera.zoom = 240;
+camera.zoom = 300;
 camera.updateProjectionMatrix();
 var renderer = new THREE.WebGLRenderer({ antialias: false });
 renderer.outputEncoding = THREE.sRGBEncoding;

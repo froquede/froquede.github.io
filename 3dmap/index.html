@@ -17,11 +17,24 @@
             overflow: hidden;
             background: #fafafa;
         }
+        
+        .quality {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+        }
     </style>
 </head>
 
 <body>
-    <p style="position: absolute; top: 4px; left: 4px; color: white; padding: 0; margin: 0;" class="js-value">0% loaded</p>
+    <p style="position: absolute; top: 4px; left: 4px; color: white; padding: 0; margin: 0;" class="js-value">0% loaded
+    </p>
+
+    <div class="quality">
+        <button class="js-quality" value="low">LOW</button>
+        <button class="js-quality" value="medium">MEDIUM</button>
+        <button class="js-quality" value="high">HIGH</button>
+    </div>
 </body>
 <script src="https://threejs.org/build/three.min.js"></script>
 <script src="https://cdn.rawgit.com/mrdoob/three.js/master/examples/js/loaders/GLTFLoader.js"></script>
