@@ -1,9 +1,9 @@
 const video = document.getElementById('video');
 
 Promise.all([
-	faceapi.nets.tinyFaceDetector.loadFromUri('/models'),
-	faceapi.nets.faceLandmark68Net.loadFromUri('/models'),
-	faceapi.nets.faceRecognitionNet.loadFromUri('/models'),
+	faceapi.nets.tinyFaceDetector.loadFromUri('./models'),
+	faceapi.nets.faceLandmark68Net.loadFromUri('./models'),
+	faceapi.nets.faceRecognitionNet.loadFromUri('./models'),
 ]).then(startVideo)
 
 function startVideo() {
@@ -82,8 +82,8 @@ function checkBoundaries(bbox) {
 }
 
 function crop() {
-	if (avg >= .9) {
-
+	if (avg >= .9 && checkBoundaries(bbox)) {
+		let canvas_copy = document.createElement('canvas');
 	}
 }
 
