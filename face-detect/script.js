@@ -14,13 +14,16 @@ function startVideo() {
 	)
 }
 
+const MIN_SCORE = .9; // 0 - 1
 let resized_w = 640;
 let fps = 12;
 let avg = 0;
 let offset = (video.height * .33) / 2;
+let last_bbox = {}
+var canvas;
 
 video.addEventListener('play', () => {
-	const canvas = faceapi.createCanvasFromMedia(video);
+	canvas = faceapi.createCanvasFromMedia(video);
 	document.body.querySelector('.webcam-container').append(canvas);
 	let ratio_w = resized_w / video.width;
 	const displaySize = { width: video.width * ratio_w, height: video.height * ratio_w };
@@ -44,7 +47,7 @@ video.addEventListener('play', () => {
 			ctx.setLineDash([]);
 			ctx.arc((bbox._x + (bbox._width / 2)), bbox._y + (bbox._height / 2), (bbox._width / 2) * padding, 0, 2 * Math.PI);
 			avg = scores.reduce((a, b) => a + b, 0) / scores.length;
-			if (avg >= .9 && checkBoundaries(bbox)) {
+			if (avg >= MIN_SCORE && checkBoundaries(bbox)) {
 				ctx.strokeStyle = `rgba(46, 204, 113, .8)`;
 			}
 			else {
@@ -55,7 +58,7 @@ video.addEventListener('play', () => {
 			scores.push(resizedDetections[0].detection._score);
 			if (scores.length >= fps) { scores.shift(); }
 
-			console.log(avg, checkBoundaries(bbox));
+			last_bbox = bbox;
 		}
 
 		ctx.beginPath();
@@ -82,8 +85,28 @@ function checkBoundaries(bbox) {
 }
 
 function crop() {
-	if (avg >= .9 && checkBoundaries(bbox)) {
+	if (avg >= MIN_SCORE && checkBoundaries(last_bbox)) {
+		let r_offset = Math.round(offset);
 		let canvas_copy = document.createElement('canvas');
+		canvas_copy.width = video.height - (r_offset * 2);
+		canvas_copy.height = video.height - (r_offset * 2);
+		canvas_copy.getContext('2d').drawImage(video, last_bbox._x - r_offset, last_bbox._y - r_offset, last_bbox._width + (r_offset * 2), last_bbox._width + (r_offset * 2), 0, 0, canvas_copy.width, canvas_copy.height);
+		return canvas_copy.toDataURL('image/jpeg', 1.0);
+	}
+	else {
+		return false;
+	}
+}
+
+function cropClick() {
+	let result = crop();
+	if(result) {
+		let img = document.createElement('img');
+		img.src = result;
+		document.body.appendChild(img);
+	}
+	else {
+		alert('Posicionamento inválido, siga as instruções');
 	}
 }
 
