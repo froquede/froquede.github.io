@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SXL walking mod animation generator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+</head>
+<body>
+    <style>
+        html, body {
+            margin: 0;
+            width: 100vw;
+            height: 100vh;
+            padding: 0;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #2C3A47;
+        }
+        
+        * {
+            font-family: 'Open Sans', sans-serif;
+            color: #fafafa;
+        }
+
+        div {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .__hidden {
+            display: none;
+        }
+    </style>
+    <drop-area></drop-area>
+    <div class="loader __hidden">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto; display: block;" width="200px" height="200px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+            <circle cx="50" cy="50" fill="none" stroke="#fafafa" stroke-width="10" r="35" stroke-dasharray="164.93361431346415 56.97787143782138">
+                <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="1s" values="0 50 50;360 50 50" keyTimes="0;1"></animateTransform>
+            </circle>
+        </svg>
+    </div>
+    <div class="download __hidden">
+        <p>if it automatically doesnt start, click here to </p>
+        <a id="downloadAnchorElem">download animation</a>
+    </div>
+</body>
+<script src="listeners.js"></script>
+<script type="module" src="drop-area.js"></script>
+<script>
+    let meta, data;
+    
+    window.listen('drop', file => {
+        if(file.name == "BoneMeta.txt") meta = file.result.toString().split('\r').join('').split("\n");
+        if(file.name == "BoneData.txt") data = file.result.toString().split('\r').join('');
+        
+        if(meta && data) {
+            document.querySelector("drop-area").classList.add("__hidden");
+            document.querySelector(".loader").classList.remove("__hidden");
+            setTimeout(() => {
+                convert();
+            }, 0);
+        }
+    });
+    
+    function convert() {
+        let result = {}
+        let parts = data.split("##");
+        let total = 0;
+        
+        let higher = 0, lower = Infinity;
+        
+        for(let part of parts) {
+            part = part.split("\n");
+            part.pop();
+            let name = getPart(('' + part.shift()).split("mixamorig:").join(""));
+            if(name && name != "undefined") {        
+                result[name] = {position: [], quaternion: []}
+                total = part.length;
+                for(let vector of part) {
+                    vector = vector.split(',');
+                    result[name].position.push([+vector[0],+vector[1],+vector[2]]);
+                    result[name].quaternion.push([+vector[3],+vector[4],+vector[5],+vector[6]]);
+                }
+            }
+        }
+        
+        console.log(meta);
+        
+        meta[1] = meta[1].split(',').join('.');
+        let duration = +meta[1];
+        let times = [];
+        
+        for(let i = 0; i < total - 1; i++) times.push((duration/total) * (i+1))
+        
+        let json_result = {};
+        json_result.parts = result;
+        json_result.duration = duration;
+        json_result.times = times;
+
+        document.querySelector(".loader").classList.add("__hidden");
+        document.querySelector(".download").classList.remove("__hidden");
+
+        setTimeout(() => {
+            var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(json_result));
+            var dlAnchorElem = document.getElementById('downloadAnchorElem');
+            dlAnchorElem.setAttribute("href",dataStr);
+            dlAnchorElem.setAttribute("download", `${meta[0]}.json`);
+            dlAnchorElem.click();
+        }, 0);        
+    }
+    
+    function getPart(id)
+    {
+        if (id == "Hips") return "Skater_pelvis";
+        if (id == "Spine") return "Skater_Spine";
+        if (id == "Spine1") return "Skater_Spine1";
+        if (id == "Spine2") return "Skater_Spine2";
+        if (id == "Head") return "Skater_Neck";
+        if (id == "HeadTop_End") return "Skater_Head";
+        if (id == "LeftArm") return "Skater_Arm_l";
+        if (id == "LeftForeArm") return "Skater_ForeArm_l";
+        if (id == "LeftHand") return "Skater_hand_l";
+        if (id == "RightArm") return "Skater_Arm_r";
+        if (id == "RightForeArm") return "Skater_ForeArm_r";
+        if (id == "RightHand") return "Skater_hand_r";
+        if (id == "LeftUpLeg") return "Skater_UpLeg_l";
+        if (id == "LeftLeg") return "Skater_Leg_l";
+        if (id == "LeftFoot") return "Skater_foot_l";
+        if (id == "RightUpLeg") return "Skater_UpLeg_r";
+        if (id == "RightLeg") return "Skater_Leg_r";
+        if (id == "RightFoot") return "Skater_foot_r";    
+        if (id == "RightShoulder") return "Skater_Shoulder_r";
+        if (id == "LeftShoulder") return "Skater_Shoulder_l";    
+        if (id == "LeftToeBase") return "Skater_Toe1_l";
+        if (id == "LeftToe_End") return "Skater_Toe2_l";
+        if (id == "RightToeBase") return "Skater_Toe1_r";
+        if (id == "RightToe_End") return "Skater_Toe2_r";
+        
+        return id;
+    }
+</script>
+</html>
