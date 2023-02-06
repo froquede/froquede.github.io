@@ -75,13 +75,15 @@ class DropArea extends LitElement {
 
 	onFiles(e) {
 		let target = e.dataTransfer || e.target;
+		console.log(target.files);
 		for (let i = 0; i < target.files.length; i++) {
 			let fr = new FileReader();
+			let file = target.files[i];
             fr.onload = (event) => {
-				fr.name = target.files[i].name;
+				fr.name = file.name;
 				window.on('drop', fr);                
             }              
-            fr.readAsText(target.files[i]);
+            fr.readAsText(file);
 		}
 		this.requestUpdate();
 	}
