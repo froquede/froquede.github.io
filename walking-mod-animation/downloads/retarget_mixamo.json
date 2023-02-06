@@ -1,0 +1,382 @@
+{
+    "rokoko_custom_names": true,
+    "version": 1,
+    "bones": {
+        "custom_bone_hips_jnt": [
+            "hips_jnt",
+            "skater_pelvis"
+        ],
+        "custom_bone_spine_jnt": [
+            "spine_jnt",
+            "skater_spine"
+        ],
+        "custom_bone_spine1_jnt": [
+            "spine1_jnt",
+            "skater_spine1"
+        ],
+        "custom_bone_spine2_jnt": [
+            "spine2_jnt",
+            "skater_spine2"
+        ],
+        "custom_bone_neck_jnt": [
+            "neck_jnt",
+            "skater_neck"
+        ],
+        "custom_bone_head_jnt": [
+            "head_jnt",
+            "skater_head"
+        ],
+        "custom_bone_l_shoulder_jnt": [
+            "l_shoulder_jnt",
+            "skater_shoulder_l"
+        ],
+        "custom_bone_l_arm_jnt": [
+            "l_arm_jnt",
+            "skater_arm_l"
+        ],
+        "custom_bone_l_forearm_jnt": [
+            "l_forearm_jnt",
+            "skater_forearm_l"
+        ],
+        "custom_bone_l_hand_jnt": [
+            "l_hand_jnt",
+            "skater_hand_l"
+        ],
+        "custom_bone_l_handthumb1_jnt": [
+            "l_handthumb1_jnt",
+            "skater_thumb_01_l"
+        ],
+        "custom_bone_l_handthumb2_jnt": [
+            "l_handthumb2_jnt",
+            "skater_thumb_02_l"
+        ],
+        "custom_bone_l_handthumb3_jnt": [
+            "l_handthumb3_jnt",
+            "skater_thumb_03_l"
+        ],
+        "custom_bone_l_handindex1_jnt": [
+            "l_handindex1_jnt",
+            "skater_index_01_l"
+        ],
+        "custom_bone_l_handindex2_jnt": [
+            "l_handindex2_jnt",
+            "skater_index_02_l"
+        ],
+        "custom_bone_l_handindex3_jnt": [
+            "l_handindex3_jnt",
+            "skater_index_03_l"
+        ],
+        "custom_bone_l_handmiddle1_jnt": [
+            "l_handmiddle1_jnt",
+            "skater_middle_01_l"
+        ],
+        "custom_bone_l_handmiddle2_jnt": [
+            "l_handmiddle2_jnt",
+            "skater_middle_02_l"
+        ],
+        "custom_bone_l_handmiddle3_jnt": [
+            "l_handmiddle3_jnt",
+            "skater_middle_03_l"
+        ],
+        "custom_bone_l_handring1_jnt": [
+            "l_handring1_jnt",
+            "skater_ring_01_l"
+        ],
+        "custom_bone_l_handring2_jnt": [
+            "l_handring2_jnt",
+            "skater_ring_02_l"
+        ],
+        "custom_bone_l_handring3_jnt": [
+            "l_handring3_jnt",
+            "skater_ring_03_l"
+        ],
+        "custom_bone_l_handpinky1_jnt": [
+            "l_handpinky1_jnt",
+            "skater_pinky_01_l"
+        ],
+        "custom_bone_l_handpinky2_jnt": [
+            "l_handpinky2_jnt",
+            "skater_pinky_02_l"
+        ],
+        "custom_bone_l_handpinky3_jnt": [
+            "l_handpinky3_jnt",
+            "skater_pinky_03_l"
+        ],
+        "custom_bone_r_shoulder_jnt": [
+            "r_shoulder_jnt",
+            "skater_shoulder_r"
+        ],
+        "custom_bone_r_arm_jnt": [
+            "r_arm_jnt",
+            "skater_arm_r"
+        ],
+        "custom_bone_r_forearm_jnt": [
+            "r_forearm_jnt",
+            "skater_forearm_r"
+        ],
+        "custom_bone_r_hand_jnt": [
+            "r_hand_jnt",
+            "skater_hand_r"
+        ],
+        "custom_bone_r_handthumb1_jnt": [
+            "r_handthumb1_jnt",
+            "skater_thumb_01_r"
+        ],
+        "custom_bone_r_handthumb2_jnt": [
+            "r_handthumb2_jnt",
+            "skater_thumb_02_r"
+        ],
+        "custom_bone_r_handthumb3_jnt": [
+            "r_handthumb3_jnt",
+            "skater_thumb_03_r"
+        ],
+        "custom_bone_r_handindex1_jnt": [
+            "r_handindex1_jnt",
+            "skater_index_01_r"
+        ],
+        "custom_bone_r_handindex2_jnt": [
+            "r_handindex2_jnt",
+            "skater_index_02_r"
+        ],
+        "custom_bone_r_handindex3_jnt": [
+            "r_handindex3_jnt",
+            "skater_index_03_r"
+        ],
+        "custom_bone_r_handmiddle1_jnt": [
+            "r_handmiddle1_jnt",
+            "skater_middle_01_r"
+        ],
+        "custom_bone_r_handmiddle2_jnt": [
+            "r_handmiddle2_jnt",
+            "skater_middle_02_r"
+        ],
+        "custom_bone_r_handmiddle3_jnt": [
+            "r_handmiddle3_jnt",
+            "skater_middle_03_r"
+        ],
+        "custom_bone_r_handring1_jnt": [
+            "r_handring1_jnt",
+            "skater_ring_01_r"
+        ],
+        "custom_bone_r_handring2_jnt": [
+            "r_handring2_jnt",
+            "skater_ring_02_r"
+        ],
+        "custom_bone_r_handring3_jnt": [
+            "r_handring3_jnt",
+            "skater_ring_03_r"
+        ],
+        "custom_bone_r_handpinky1_jnt": [
+            "r_handpinky1_jnt",
+            "skater_pinky_01_r"
+        ],
+        "custom_bone_r_handpinky2_jnt": [
+            "r_handpinky2_jnt",
+            "skater_pinky_02_r"
+        ],
+        "custom_bone_r_handpinky3_jnt": [
+            "r_handpinky3_jnt",
+            "skater_pinky_03_r"
+        ],
+        "custom_bone_l_upleg_jnt": [
+            "l_upleg_jnt",
+            "skater_upleg_l"
+        ],
+        "custom_bone_l_leg_jnt": [
+            "l_leg_jnt",
+            "skater_leg_l"
+        ],
+        "custom_bone_l_foot_jnt": [
+            "l_foot_jnt",
+            "skater_foot_l"
+        ],
+        "custom_bone_l_toebase_jnt": [
+            "l_toebase_jnt",
+            "skater_toe1_l"
+        ],
+        "custom_bone_r_upleg_jnt": [
+            "r_upleg_jnt",
+            "skater_upleg_r"
+        ],
+        "custom_bone_r_leg_jnt": [
+            "r_leg_jnt",
+            "skater_leg_r"
+        ],
+        "custom_bone_r_foot_jnt": [
+            "r_foot_jnt",
+            "skater_foot_r"
+        ],
+        "custom_bone_r_toebase_jnt": [
+            "r_toebase_jnt",
+            "skater_toe1_r"
+        ],
+        "leftRingMedial": [
+            "skater_ring_02_l"
+        ],
+        "rightUpLeg": [
+            "skater_upleg_r"
+        ],
+        "rightRingDistal": [
+            "skater_ring_03_r"
+        ],
+        "leftLowerArm": [
+            "skater_forearm_l"
+        ],
+        "leftIndexProximal": [
+            "skater_index_01_l"
+        ],
+        "rightMiddleDistal": [
+            "skater_middle_03_r"
+        ],
+        "rightLeg": [
+            "skater_leg_r"
+        ],
+        "custom_bone_mixamorig:righttoe_end": [
+            "mixamorig:righttoe_end",
+            "skater_toe2_r"
+        ],
+        "rightIndexMedial": [
+            "skater_index_02_r"
+        ],
+        "leftIndexDistal": [
+            "skater_index_03_l"
+        ],
+        "leftShoulder": [
+            "skater_shoulder_l"
+        ],
+        "leftRingDistal": [
+            "skater_ring_03_l"
+        ],
+        "leftThumbDistal": [
+            "skater_thumb_03_l"
+        ],
+        "rightLittleMedial": [
+            "skater_pinky_02_r"
+        ],
+        "custom_bone_mixamorig:spine1": [
+            "mixamorig:spine1",
+            "skater_spine1"
+        ],
+        "leftIndexMedial": [
+            "skater_index_02_l"
+        ],
+        "leftMiddleDistal": [
+            "skater_middle_03_l"
+        ],
+        "rightLowerArm": [
+            "skater_forearm_r"
+        ],
+        "neck": [
+            "skater_neck"
+        ],
+        "rightFoot": [
+            "skater_foot_r"
+        ],
+        "rightIndexProximal": [
+            "skater_index_01_r"
+        ],
+        "custom_bone_mixamorig:lefttoe_end": [
+            "mixamorig:lefttoe_end",
+            "skater_toe2_l"
+        ],
+        "leftMiddleProximal": [
+            "skater_middle_01_l"
+        ],
+        "rightRingMedial": [
+            "skater_ring_02_r"
+        ],
+        "rightShoulder": [
+            "skater_shoulder_r"
+        ],
+        "rightMiddleMedial": [
+            "skater_middle_02_r"
+        ],
+        "rightThumbDistal": [
+            "skater_thumb_03_r"
+        ],
+        "rightIndexDistal": [
+            "skater_index_03_r"
+        ],
+        "leftUpLeg": [
+            "skater_upleg_l"
+        ],
+        "custom_bone_mixamorig:spine": [
+            "mixamorig:spine",
+            "skater_spine"
+        ],
+        "custom_bone_mixamorig:spine2": [
+            "mixamorig:spine2",
+            "skater_spine2"
+        ],
+        "leftLeg": [
+            "skater_leg_l"
+        ],
+        "leftThumbMedial": [
+            "skater_thumb_02_l"
+        ],
+        "hip": [
+            "skater_pelvis"
+        ],
+        "leftLittleProximal": [
+            "skater_pinky_01_l"
+        ],
+        "leftMiddleMedial": [
+            "skater_middle_02_l"
+        ],
+        "leftLittleDistal": [
+            "skater_pinky_03_l"
+        ],
+        "head": [
+            "skater_head"
+        ],
+        "leftFoot": [
+            "skater_foot_l"
+        ],
+        "leftThumbProximal": [
+            "skater_thumb_01_l"
+        ],
+        "rightThumbProximal": [
+            "skater_thumb_01_r"
+        ],
+        "rightToe": [
+            "skater_toe1_r"
+        ],
+        "rightRingProximal": [
+            "skater_ring_01_r"
+        ],
+        "rightThumbMedial": [
+            "skater_thumb_02_r"
+        ],
+        "rightLittleDistal": [
+            "skater_pinky_03_r"
+        ],
+        "leftLittleMedial": [
+            "skater_pinky_02_l"
+        ],
+        "rightHand": [
+            "skater_hand_r"
+        ],
+        "rightMiddleProximal": [
+            "skater_middle_01_r"
+        ],
+        "leftHand": [
+            "skater_hand_l"
+        ],
+        "rightLittleProximal": [
+            "skater_pinky_01_r"
+        ],
+        "leftToe": [
+            "skater_toe1_l"
+        ],
+        "leftRingProximal": [
+            "skater_ring_01_l"
+        ],
+        "leftUpperArm": [
+            "skater_arm_l"
+        ],
+        "rightUpperArm": [
+            "skater_arm_r"
+        ]
+    },
+    "shapes": {}
+}
