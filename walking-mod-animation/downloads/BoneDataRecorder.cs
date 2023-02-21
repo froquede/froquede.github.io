@@ -76,7 +76,7 @@ public class BoneDataRecorder : MonoBehaviour
 
         Debug.Log(folderPath);
 
-        using (StreamWriter writer = new StreamWriter(Path.Combine(folderPath, "BoneData.txt")))
+        using (StreamWriter writer = new StreamWriter(Path.Combine(folderPath, "Assets\\BoneData.txt")))
         {
             foreach (string boneName in positions.Keys)
             {
@@ -90,7 +90,7 @@ public class BoneDataRecorder : MonoBehaviour
             }
         }
 
-        using (StreamWriter writer = new StreamWriter(Path.Combine(folderPath, "BoneMeta.txt")))
+        using (StreamWriter writer = new StreamWriter(Path.Combine(folderPath, "Assets\\BoneMeta.txt")))
         {
             writer.WriteLine(anim_name);
             writer.Write(clip.length);
