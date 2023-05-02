@@ -51,6 +51,8 @@
     <div class="download __hidden">
         <p>if it automatically doesnt start, click here to </p>
         <a id="downloadAnchorElem">download animation</a>
+
+        <a style="margin-top: 42px;" href="">generate a new one</a>
     </div>
 </body>
 <script src="listeners.js"></script>
@@ -59,8 +61,8 @@
     let meta, data;
     
     window.listen('drop', file => {
-        if(file.name == "BoneMeta.txt") meta = file.result.toString().split('\r').join('').split("\n");
-        if(file.name == "BoneData.txt") data = file.result.toString().split('\r').join('');
+        if(file.name.split("BoneMeta").length > 1) meta = file.result.toString().split('\r').join('').split("\n");
+        if(file.name.split("BoneData").length > 1) data = file.result.toString().split('\r').join('');
         
         if(meta && data) {
             document.querySelector("drop-area").classList.add("__hidden");

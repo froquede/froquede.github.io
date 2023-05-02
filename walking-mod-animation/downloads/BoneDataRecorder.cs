@@ -13,6 +13,8 @@ public class BoneDataRecorder : MonoBehaviour
     public string anim_name;
     int frameCount = 0;
     int fps, totalFrames;
+    Vector3 position = Vector3.zero;
+    public bool anchorPelvis = false;
 
     void Start()
     {
@@ -25,6 +27,8 @@ public class BoneDataRecorder : MonoBehaviour
         totalFrames = (int)(clip.length * clip.frameRate);
         fps = (int)clip.frameRate;
 
+        position = transform.position;
+
         foreach (Transform bone in bones)
         {
             positions.Add(bone.name, new List<Vector3>());
@@ -35,12 +39,32 @@ public class BoneDataRecorder : MonoBehaviour
     int wait_count = 0;
     void FixedUpdate()
     {
-        if (wait_count < 24) {
+        if (wait_count == 0) anim.Play(clip.name);
+        if (wait_count == 12)
+        {
+            anim.Stop();
+            anim.Rewind();
+        }
+
+        if (wait_count < 24)
+        {
             wait_count++;
             return;
-        } 
+        }
 
-        if (anim.IsPlaying(clip.name))
+        if (wait_count == 24)
+        {
+            anim.Rewind();
+            anim.Play(clip.name);
+            wait_count++;
+        }
+
+        if (!anim.IsPlaying(clip.name))
+        {
+            SaveData();
+            UnityEditor.EditorApplication.isPlaying = false;
+        }
+        else
         {
             foreach (Transform bone in bones)
             {
@@ -49,23 +73,11 @@ public class BoneDataRecorder : MonoBehaviour
             }
             frameCount++;
         }
+    }
 
-        if (frameCount > 0)
-        {           
-            if (!anim.IsPlaying(clip.name))
-            {
-                SaveData();
-                UnityEditor.EditorApplication.isPlaying = false;
-            }
-        }
-        else
-        {
-            if (!anim.IsPlaying(clip.name))
-            {
-                Debug.Log("Play animation: " + fps + " " + totalFrames);
-                anim.Play(clip.name);
-            }
-        }
+    void Update()
+    {
+        if (anchorPelvis) transform.position = position;
     }
 
     void SaveData()
@@ -76,12 +88,12 @@ public class BoneDataRecorder : MonoBehaviour
 
         Debug.Log(folderPath);
 
-        using (StreamWriter writer = new StreamWriter(Path.Combine(folderPath, "Assets\\BoneData.txt")))
+        using (StreamWriter writer = new StreamWriter(Path.Combine(folderPath, "Assets\\BoneData_" + anim_name + ".txt")))
         {
             foreach (string boneName in positions.Keys)
             {
                 writer.WriteLine("##" + boneName);
-                for(int i = 0; i < positions[boneName].Count; i++)
+                for (int i = 0; i < positions[boneName].Count; i++)
                 {
                     Vector3 position = positions[boneName][i];
                     Quaternion rotation = rotations[boneName][i];
@@ -90,7 +102,7 @@ public class BoneDataRecorder : MonoBehaviour
             }
         }
 
-        using (StreamWriter writer = new StreamWriter(Path.Combine(folderPath, "Assets\\BoneMeta.txt")))
+        using (StreamWriter writer = new StreamWriter(Path.Combine(folderPath, "Assets\\BoneMeta_" + anim_name + ".txt")))
         {
             writer.WriteLine(anim_name);
             writer.Write(clip.length);
