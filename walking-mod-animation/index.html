@@ -107,6 +107,9 @@
         json_result.parts = result;
         json_result.duration = duration;
         json_result.times = times;
+        json_result.skate_animation = new Boolean(meta[2]);
+        json_result.mag_start = +meta[3];
+        json_result.mag_end = +meta[4];
 
         document.querySelector(".loader").classList.add("__hidden");
         document.querySelector(".download").classList.remove("__hidden");
