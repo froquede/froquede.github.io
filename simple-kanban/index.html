@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kanban Board</title>
+  <script type="module" src="kanban-app.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    .board {
+      display: flex;
+      justify-content: space-around;
+      padding: 20px;
+    }
+    .column {
+      background: #f0f0f0;
+      padding: 20px;
+      width: 30%;
+      min-height: 300px;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .card {
+      background: white;
+      margin-bottom: 10px;
+      padding: 10px;
+      border-radius: 4px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      cursor: grab;
+    }
+  </style>
+</head>
+<body>
+  <kanban-app></kanban-app>
+</body>
+</html>

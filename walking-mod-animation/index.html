@@ -39,6 +39,20 @@
         .__hidden {
             display: none;
         }
+
+        .download-links {
+            position: fixed;
+            bottom: 42px;
+            right: 64px;
+            text-align: right;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+        }
+
+        .download-links a {
+            margin-top: 4px;
+        }
     </style>
     <drop-area></drop-area>
     <div class="loader __hidden">
@@ -53,6 +67,10 @@
         <a id="downloadAnchorElem">download animation</a>
 
         <a style="margin-top: 42px;" href="">generate a new one</a>
+    </div>
+    <div class="download-links">
+        <a href="https://froquede.github.io/walking-mod-animation/downloads/Skater_Rigged_for_XLGM_2022.fbx" target="_blank">Skater_Rigged_for_XLGM_2022</a>
+        <a href="https://froquede.github.io/walking-mod-animation/downloads/BoneDataRecorder.cs" target="_blank">Bone Data Recorder Script</a>
     </div>
 </body>
 <script src="listeners.js"></script>
